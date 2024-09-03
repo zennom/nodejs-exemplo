@@ -1,18 +1,13 @@
-import express,{Request,Response} from 'express'
-import {Server} from 'http'
+import express, {Request, Response} from "express"
+import MainRoutes from './routes/index'
 
 const server = express()
 
-server.get('/',(req,res) => {
 
-    res.send("Hello World!")
-
-})
-
-server.get('/contato',(req:Request, res:Response) =>{
-
-    res.send("Está página é de contato")
-})
+server.use(MainRoutes)
 
 server.listen(3000)
 
+server.use((req:Request, res:Response) =>{
+    res.status(404).send('Página não encontrada')
+})
